@@ -1,0 +1,29 @@
+.card{
+    width: 1200px;
+    margin-left: 100px;
+    margin-bottom: 20px;
+}
+.createTask{
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.margin{
+    margin-left: 100px;
+}
+.card-text{
+    color: gray;
+}
+body{
+    background-color: rgb(246, 234, 247);
+}
+.carddet{
+    height: 600px;
+    width: 700px;
+    background-color: white;
+}
+.details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}

@@ -1,0 +1,11 @@
+.bg-image {
+    background-image: url('../images/home.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 600px;
+}
+
+.textcolor{
+    color: rgb(158, 216, 248);
+}

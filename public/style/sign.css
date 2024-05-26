@@ -1,0 +1,33 @@
+.signup-content{
+    display:flex;
+    justify-content: center;
+    margin-top: 130px;
+    padding: 50px;
+    
+}
+.form-group{
+    margin-top: 30px;
+}
+.form-input{
+    height: 40px;
+    width: 300px;
+    font-size:medium;
+}
+.form-title{
+    font-size:xx-large;
+}
+body{
+    background-image: url('../images/voilet.jpg');
+    background-size: cover;
+
+    background-repeat: no-repeat;
+}
+.form-submit{
+    margin-bottom: 10px;
+    width: 80px;
+    height: 40px;
+}
+.container{
+    width: 500px;
+    background-color: rgb(246, 234, 247);
+}
