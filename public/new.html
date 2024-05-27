@@ -49,7 +49,7 @@
             <div class="row g-3 d-flex align-items-center">
               <div class="col-sm-6">
                 <label for="task-title" class="form-label me-lg-3">Task Title</label>
-                <input type="text" class="form-control" id="task-title" name="title" placeholder="" value="" required="">
+                <input type="text" class="form-control" id="task-title" name="title" placeholder="" value="" required="" autocomplete="off">
                 <div class="invalid-feedback">
                   Task name is required.
                 </div>
@@ -58,7 +58,7 @@
                
               <div class="col-12">
                 <label for="Description" class="form-label">Task Description</label>
-                <input type="text" class="form-control" name="description" id="Description" placeholder="" required="">
+                <input type="text" class="form-control" name="description" id="Description" placeholder="" required="" autocomplete="off">
                 <div class="invalid-feedback">
                   Please enter your Task Description.
                 </div>
@@ -66,7 +66,7 @@
               <hr class="my-4">
               <div>
                 <label for="task-deadline" class="form-label me-lg-3">Task Deadline date</label>
-              <input type="text" class="task-deadline" id="task-deadline" name="deadline" placeholder="yyyy-mm-dd">
+              <input type="date" class="task-deadline" id="task-deadline" name="deadline" placeholder="yyyy-mm-dd" autocomplete="off">
             </div>
 
             <div>
@@ -90,7 +90,10 @@
                 </div>
               </div>
   
-            
+              <div>
+                <label for="task-email" class="form-label me-lg-3">Get notified on email: </label>
+              <input type="text" class="form-control" id="email" name="email">
+            </div>
             <hr class="my-4">
   
             <button class="btn btn-outline-dark me-lg-3" type="submit" style="width: 200px;">Add</button>

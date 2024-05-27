@@ -51,6 +51,11 @@
     <div id="new-task-details"></div> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+
+function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toISOString().split('T')[0];
+        }
         function loadTasks() {
             fetch('/tasks')
                 .then(response => response.json())
@@ -71,7 +76,7 @@
                                         <div>
                                             <h4 class="card-title mb-2">${task.title}</h4>
                                             <h6 class="card-text text-gray mb-0">
-                                                Deadline Date: ${task.deadline}&emsp;&emsp;Deadline Time: ${task.time}
+                                                Deadline Date: ${formatDate(task.deadline)}&emsp;&emsp;Deadline Time: ${task.time}
                                             </h6>
                                         </div>
                                         <a href="task.html?title=${encodeURIComponent(task.title)}" class="btn btn-primary">View Details</a>

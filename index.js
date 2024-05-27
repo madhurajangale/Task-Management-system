@@ -4,7 +4,8 @@ import pg from "pg";
 import connectPgSimple from 'connect-pg-simple';
 import session from 'express-session';
 import crypto from 'crypto';
-
+import nodemailer from 'nodemailer';
+import cron from 'node-cron';
 
 
 
@@ -106,6 +107,13 @@ router.post('/login', (req, res) => {
     });
 });
 
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+      user: 'madhurajangle2004@gmail.com',
+      pass: 'baun icas crbn xbeh'  // Use environment variables for security
+  }
+});
 let tasks = []; 
 
 
@@ -130,8 +138,43 @@ app.get('/tasks', async (req, res) => {
 
 app.post('/add-task', async (req, res) => {
    
-    const { title, description, deadline, time, status } = req.body;
-    tasks.push({ title, description, deadline, time, status });
+    const { title, description, deadline, time, status, email } = req.body;
+    tasks.push({ title, description, deadline, time, status,email });
+    console.log(deadline);
+  console.log(time);
+  console.log(email);
+  const taskTime = new Date(`${deadline}T${time}`);
+
+    // Get the time one hour before the task time
+    const oneHourBeforeTask = new Date(taskTime.getTime() - 60 * 60 * 1000);
+    const hours = oneHourBeforeTask.getHours();
+    const minutes = oneHourBeforeTask.getMinutes();
+
+    console.log(`Task Time: ${taskTime}`);
+    console.log(`One Hour Before Task: ${oneHourBeforeTask}`);
+
+    const cronExpression = `0 ${minutes} ${hours} * * *`;
+    console.log(`Cron Expression: ${cronExpression}`);
+    // Schedule email sending one hour before the task time using node-cron
+    cron.schedule(`0 ${minutes} ${hours} * * *`, () => {
+      console.log('Cron job triggered');
+        const mailOptions = {
+            from: '"Madhura" <madhurajangle2004@gmail.com>',
+            to: email,
+            subject: `Reminder: ${title}`,
+            text: `You have a task "${title}" due in one hour. Description: ${description}`
+        };
+
+        transporter.sendMail(mailOptions)
+            .then(info => {
+                console.log('Email sent:', info.response);
+            })
+            .catch(error => {
+                console.error('Error sending email:', error);
+            });
+    });
+
+    
     try {
         await db.query(
             `INSERT INTO task (title, description, deadline, time, status, userid) VALUES ($1, $2, $3, $4, $5, $6)`,

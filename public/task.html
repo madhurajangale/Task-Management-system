@@ -47,7 +47,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="edit-deadline" class="form-label">Deadline Date</label>
-                                <input type="text" class="form-control" id="edit-deadline" name="deadline" required>
+                                <input type="date" class="form-control" id="edit-deadline" name="deadline" required>
                             </div>
                             <div class="mb-3">
                                 <label for="edit-time" class="form-label">Deadline Time</label>
@@ -70,7 +70,11 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const taskTitle = urlParams.get('title');
-
+        
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toISOString().split('T')[0];
+        }
         
         if (taskTitle) {
             fetch(`/task/title?title=${encodeURIComponent(taskTitle)}`)
@@ -80,13 +84,13 @@
                         document.getElementById('task-status').textContent = task.status;
                         document.getElementById('task-title').textContent = task.title;
                         document.getElementById('task-description').textContent = task.description;
-                        document.getElementById('task-deadline').textContent = task.deadline;
+                        document.getElementById('task-deadline').textContent = formatDate(task.deadline);
                         document.getElementById('task-time').textContent = task.time;
 
                         
                         document.getElementById('edit-title').value = task.title;
                         document.getElementById('edit-description').value = task.description;
-                        document.getElementById('edit-deadline').value = task.deadline;
+                        document.getElementById('edit-deadline').value = formatDate(task.deadline); 
                         document.getElementById('edit-time').value = task.time;
                         document.getElementById('edit-status').value = task.status;
                     } else {
