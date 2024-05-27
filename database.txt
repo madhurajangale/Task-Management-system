@@ -1,0 +1,66 @@
+this is the postgres script.
+
+  1. database creation-
+  CREATE DATABASE task
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'English_India.1252'
+    LC_CTYPE = 'English_India.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
+2. tables creation-
+
+  sessions table
+
+  CREATE TABLE IF NOT EXISTS public.sessions
+(
+    sid character varying COLLATE pg_catalog."default" NOT NULL,
+    sess json NOT NULL,
+    expire timestamp(6) without time zone NOT NULL,
+    userid integer,
+    CONSTRAINT sessions_pkey PRIMARY KEY (sid)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.sessions
+    OWNER to postgres;
+
+task table
+
+CREATE TABLE IF NOT EXISTS public.task
+(
+    id integer NOT NULL DEFAULT nextval('task_id_seq'::regclass),
+    title character varying(25) COLLATE pg_catalog."default",
+    description character varying(255) COLLATE pg_catalog."default",
+    deadline date,
+    "time" time without time zone,
+    status character varying(20) COLLATE pg_catalog."default",
+    userid integer,
+    CONSTRAINT task_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.task
+    OWNER to postgres;
+
+user_data table
+
+  CREATE TABLE IF NOT EXISTS public.user_data
+(
+    id integer NOT NULL DEFAULT nextval('user_data_id_seq'::regclass),
+    name character varying(255) COLLATE pg_catalog."default",
+    email character varying(255) COLLATE pg_catalog."default",
+    password character varying(255) COLLATE pg_catalog."default",
+    CONSTRAINT user_data_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.user_data
+    OWNER to postgres;
+
