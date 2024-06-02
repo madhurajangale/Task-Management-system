@@ -2,6 +2,7 @@
     width: 1200px;
     margin-left: 100px;
     margin-bottom: 20px;
+    
 }
 .createTask{
     margin-left: 100px;
@@ -20,6 +21,10 @@ body{
     height: 600px;
     width: 700px;
     background-color: white;
+}
+.row{
+    display: flex;
+    justify-content: center;
 }
 .details{
     display: flex;

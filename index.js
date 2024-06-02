@@ -111,7 +111,7 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
       user: 'madhurajangle2004@gmail.com',
-      pass: 'baun icas crbn xbeh'  // Use environment variables for security
+      pass: 'baun icas crbn xbeh'  
   }
 });
 let tasks = []; 
